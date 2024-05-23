@@ -3,10 +3,11 @@ import React, { useCallback, useState } from 'react';
 import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
-function PhotoFavButton() {
+function PhotoFavButton(props) {
     const [isActive, setIsActive] = useState(false);
     const handleClick = () => {
         setIsActive(prevState => !prevState);
+        props.onClick(props.photo);
     }
 
   return (
