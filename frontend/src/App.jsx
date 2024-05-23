@@ -3,6 +3,7 @@ import React from 'react';
 import './App.scss';
 import PhotoList from 'components/PhotoList';
 import TopicList from 'components/TopicList';
+import TopNavigation from 'components/TopNavigationBar';
 
 // Note: Rendering a single component to build components in isolation
 
@@ -15,8 +16,8 @@ const App = () => {
                     <PhotoListItem data={sampleDataForPhotoListItem} />
                 </div>
             ))} */}
+            <TopNavigation />
             <PhotoList />
-            <TopicList />
         </div>
     );
 };
