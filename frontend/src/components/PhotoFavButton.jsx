@@ -4,16 +4,15 @@ import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
 function PhotoFavButton() {
-    const [state, setState] = useState("inactive");
+    const [isActive, setIsActive] = useState(false);
     const handleClick = () => {
-        console.log(state);
-        state === "active" ? setState("inactive") : setState("active");
+        setIsActive(prevState => !prevState);
     }
 
   return (
     <div className="photo-list__fav-icon" onClick={handleClick}>
       <div className="photo-list__fav-icon-svg">
-        <FavIcon />
+        <FavIcon selected={isActive} />
       </div>
     </div>
   );
