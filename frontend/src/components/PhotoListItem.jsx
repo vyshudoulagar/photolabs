@@ -3,8 +3,7 @@ import React from "react";
 import "../styles/PhotoListItem.scss";
 
 
-const PhotoListItem = (props) => {
-    const { data } = props;
+const PhotoListItem = ({ data }) => {
     return (
         <div className="photo-list__item">
             <img className="photo-list__image" src={data.imageSource} alt={data.location.city} />

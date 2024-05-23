@@ -2,6 +2,7 @@ import React from 'react';
 
 import PhotoListItem from './components/PhotoListItem';
 import './App.scss';
+import './styles/PhotoList.scss'
 
 // Note: Rendering a single component to build components in isolation
 
@@ -17,9 +18,15 @@ const sampleDataForPhotoListItem = {
 };
 
 const App = () => {
+    const photos = new Array(3).fill(null);
+
     return (
         <div className="App">
-            <PhotoListItem data={sampleDataForPhotoListItem}/>
+            {photos.map((photo, index) => (
+                <div key={index} className='photo-list'>
+                    <PhotoListItem data={sampleDataForPhotoListItem} />
+                </div>
+            ))}
         </div>
     );
 };
