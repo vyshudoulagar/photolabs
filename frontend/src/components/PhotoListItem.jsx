@@ -5,10 +5,10 @@ import PhotoFavButton from "./PhotoFavButton";
 
 
 const PhotoListItem = (props) => {
-    const {data, onClick} = props;
+    const {data, onClick, photoClick} = props;
 
     return (
-        <div className="photo-list__item">
+        <div className="photo-list__item" onClick={photoClick}>
             <PhotoFavButton photo={data.id} onClick={onClick}/>
             <img className="photo-list__image" src={data.urls.regular} alt={data.location.city} />
             <div className="photo-list__user-details">

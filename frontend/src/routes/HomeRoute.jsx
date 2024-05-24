@@ -11,12 +11,13 @@ const HomeRoute = (props) => {
             ? prevFavPhoto.filter(photoId => photoId !== id)
             : [...prevFavPhoto, id]);
     }
-    let isFavPhotoExist = true;
-    favPhoto.length > 0 ? isFavPhotoExist = true : isFavPhotoExist = false;
+    
+    const isFavPhotoExist = favPhoto.length > 0;
+    
     return (
         <div className="home-route">
             <TopNavigation topics={props.topics} isFavPhotoExist={isFavPhotoExist} />
-            <PhotoList photos={props.photos} onClick={handleClick} />
+            <PhotoList photos={props.photos} onClick={handleClick} photoClick={props.photoClick} />
         </div>
     );
 };

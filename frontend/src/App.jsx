@@ -4,19 +4,18 @@ import './App.scss';
 import HomeRoute from 'routes/HomeRoute';
 import photos from 'mocks/photos';
 import topics from 'mocks/topics';
+import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 
 // Note: Rendering a single component to build components in isolation
 
 const App = () => {
-
+    const photoClick = () => {
+        return true;
+    }
     return (
         <div className="App">
-            {/* {Array.from(Array(3)).map((_, index) => (
-                <div key={index} className='photo-list'>
-                    <PhotoListItem data={sampleDataForPhotoListItem} />
-                </div>
-            ))} */}
-            <HomeRoute photos={photos} topics={topics} />
+            <HomeRoute photos={photos} photoClick={photoClick} topics={topics} />
+            {photoClick && <PhotoDetailsModal />}
         </div>
     );
 };
