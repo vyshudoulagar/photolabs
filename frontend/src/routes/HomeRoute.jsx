@@ -17,7 +17,7 @@ const HomeRoute = (props) => {
     return (
         <div className="home-route">
             <TopNavigation topics={props.topics} isFavPhotoExist={isFavPhotoExist} />
-            <PhotoList photos={props.photos} onClick={handleClick} photoClick={props.photoClick} />
+            <PhotoList photos={props.photos} onClick={handleClick} setDisplayModal={props.setDisplayModal} />
         </div>
     );
 };
