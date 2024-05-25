@@ -7,7 +7,7 @@ function PhotoFavButton(props) {
     const [isActive, setIsActive] = useState(false);
     const handleClick = () => {
         setIsActive(prevState => !prevState);
-        props.onClick(props.photo);
+        props.onClick(props.photoId);
     }
 
   return (

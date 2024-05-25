@@ -7,13 +7,14 @@ import PhotoList from 'components/PhotoList';
 import photos from 'mocks/photos';
 
 const PhotoDetailsModal = ({ onClick, displayModal, setDisplayModal }) => {
-    console.log(displayModal);
+    const similarPhotos = Object.values(displayModal.similar_photos);
+    
     return (
         <div className="photo-details-modal">
             <button className="photo-details-modal__close-button" onClick={() => setDisplayModal(null)}>
                 <img src={closeSymbol} alt="close symbol" />
             </button>
-            <PhotoFavButton photo={displayModal.id} onClick={onClick} />
+            <PhotoFavButton photoId={displayModal.id} onClick={onClick} />
             <img className="photo-details-modal__image" src={displayModal.urls.regular} alt={displayModal.location.city} />
             <div className="photo-details-modal__photographer-details">
                 <img className="photo-details-modal__photographer-profile" src={displayModal.user.profile} alt={displayModal.user.username} />
@@ -27,7 +28,7 @@ const PhotoDetailsModal = ({ onClick, displayModal, setDisplayModal }) => {
             <div className='photo-details-modal__header'>
                 <p>Similar Photos</p>
                 <div className='photo-details-modal__images'>
-                    <PhotoList photos={photos} onClick={onClick} setDisplayModal={setDisplayModal} />
+                    <PhotoList photos={similarPhotos} onClick={onClick} setDisplayModal={setDisplayModal} />
                 </div>
             </div>
         </div>
