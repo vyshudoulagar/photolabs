@@ -5,15 +5,15 @@ import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoFavButton from 'components/PhotoFavButton';
 import PhotoList from 'components/PhotoList';
 
-const PhotoDetailsModal = ({ onClick, displayModal, setDisplayModal, favPhoto }) => {
+const PhotoDetailsModal = ({ addFav, displayModal, closeDisplayModal, favPhoto }) => {
     const similarPhotos = Object.values(displayModal.similar_photos);
 
     return (
         <div className="photo-details-modal">
-            <button className="photo-details-modal__close-button" onClick={() => setDisplayModal(null)}>
+            <button className="photo-details-modal__close-button" onClick={() => closeDisplayModal()}>
                 <img src={closeSymbol} alt="close symbol" />
             </button>
-            <PhotoFavButton photoId={displayModal.id} onClick={onClick} favPhoto={favPhoto} />
+            <PhotoFavButton photoId={displayModal.id} addFav={addFav} favPhoto={favPhoto} />
             <div>
                 <img className="photo-details-modal__image" src={displayModal.urls.regular} alt={displayModal.location.city} />
             </div>

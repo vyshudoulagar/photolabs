@@ -22,12 +22,12 @@ const App = () => {
         <div className="App">
             <HomeRoute
                 photos={photos}
-                setDisplayModal={setDisplayModal}
+                setDisplayModal={onPhotoSelect}
                 topics={topics}
-                favPhoto={favPhoto}
-                handleClick={handleClick}
+                favPhoto={state.favPhoto}
+                addFav={updateToFavPhotoIds}
             />
-            {displayModal && <PhotoDetailsModal displayModal={displayModal} setDisplayModal={setDisplayModal} onClick={handleClick} favPhoto={favPhoto} />}
+            {state.displayModal && <PhotoDetailsModal displayModal={state.displayModal} closeDisplayModal={onClosePhotoDetailsModal} addFav={addFav} favPhoto={favPhoto} />}
         </div>
     );
 };
