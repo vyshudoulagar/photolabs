@@ -1,5 +1,5 @@
 
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 
 export const ACTIONS = {
     FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
@@ -24,6 +24,16 @@ function reducer(state, action) {
                 ...state,
                 favPhoto: state.favPhoto.filter(id => id !== action.payload.id)
             };
+        case ACTIONS.SET_PHOTO_DATA:
+            return {
+                ...state,
+                photoData: action.payload.data,
+            };
+        case ACTIONS.SET_TOPIC_DATA:
+            return {
+                ...state,
+                topicData: action.payload.data,
+            };
         case ACTIONS.SELECT_PHOTO:
             return {
                 ...state,
@@ -44,9 +54,24 @@ function reducer(state, action) {
 const useApplicationData = () => {
     const initialState = {
         favPhoto: [],
-        displayModal: null
+        displayModal: null,
+        photoData: [],
+        topicData: []
     }
     const [state, dispatch] = useReducer(reducer, initialState);
+
+    useEffect(() => {
+        fetch(`/api/photos`)
+            .then(res => res.json())
+            .then(data => {
+                dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: { data } })
+            });
+        fetch(`/api/topics`)
+            .then(res => res.json())
+            .then(data => {
+                dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: { data } })
+            });
+    }, []);
 
     const updateToFavPhotoIds = (id) => {
         state.favPhoto.includes(id)
@@ -61,7 +86,7 @@ const useApplicationData = () => {
     const onClosePhotoDetailsModal = () => {
         dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: { photoDetails: null } });
     };
-    
+
     return { state, updateToFavPhotoIds, onPhotoSelect, onClosePhotoDetailsModal };
 }
 

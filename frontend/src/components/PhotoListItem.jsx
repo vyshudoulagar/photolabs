@@ -5,21 +5,24 @@ import PhotoFavButton from "./PhotoFavButton";
 
 
 const PhotoListItem = (props) => {
-    const {data, addFav, setDisplayModal, favPhoto} = props;
+    const { data, addFav, setDisplayModal, favPhoto } = props;
 
     return (
-        <div className="photo-list__item" onClick={() => setDisplayModal(data)}>
+        <div className="photo-list__item" >
             <PhotoFavButton photoId={data.id} addFav={addFav} favPhoto={favPhoto} />
-            <img className="photo-list__image" src={data.urls.regular} alt={data.location.city} />
-            <div className="photo-list__user-details">
-                <img className="photo-list__user-profile" src={data.user.profile} alt={data.user.username} />
-                <div className="photo-list__user-info">
-                    <p>{data.user.username}</p>
-                    <div className="photo-list__user-location">
-                        <p>{data.location.city} {data.location.country}</p>
+            <div onClick={() => setDisplayModal(data)}>
+                <img className="photo-list__image" src={data.urls.regular} alt={data.location.city} />
+                <div className="photo-list__user-details">
+                    <img className="photo-list__user-profile" src={data.user.profile} alt={data.user.username} />
+                    <div className="photo-list__user-info">
+                        <p>{data.user.username}</p>
+                        <div className="photo-list__user-location">
+                            <p>{data.location.city} {data.location.country}</p>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     );
 };

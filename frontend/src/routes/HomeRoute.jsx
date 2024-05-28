@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import '../styles/HomeRoute.scss';
 import TopNavigation from 'components/TopNavigationBar';
@@ -12,7 +12,7 @@ const HomeRoute = (props) => {
     return (
         <div className="home-route">
             <TopNavigation topics={topics} isFavPhotoExist={isFavPhotoExist} />
-            <PhotoList photos={photos} onClick={addFav} setDisplayModal={setDisplayModal} favPhoto={favPhoto} />
+            <PhotoList photos={photos} addFav={addFav} setDisplayModal={setDisplayModal} favPhoto={favPhoto} />
         </div>
     );
 };

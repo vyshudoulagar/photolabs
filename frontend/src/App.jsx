@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import './App.scss';
 import HomeRoute from 'routes/HomeRoute';
-import photos from 'mocks/photos';
-import topics from 'mocks/topics';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import useApplicationData from 'hooks/useApplicationData';
 
@@ -21,13 +19,13 @@ const App = () => {
     return (
         <div className="App">
             <HomeRoute
-                photos={photos}
+                photos={state.photoData}
                 setDisplayModal={onPhotoSelect}
-                topics={topics}
+                topics={state.topicData}
                 favPhoto={state.favPhoto}
                 addFav={updateToFavPhotoIds}
             />
-            {state.displayModal && <PhotoDetailsModal displayModal={state.displayModal} closeDisplayModal={onClosePhotoDetailsModal} addFav={addFav} favPhoto={favPhoto} />}
+            {state.displayModal && <PhotoDetailsModal setDisplayModal={onPhotoSelect} displayModal={state.displayModal} closeDisplayModal={onClosePhotoDetailsModal} addFav={updateToFavPhotoIds} favPhoto={state.favPhoto} />}
         </div>
     );
 };
