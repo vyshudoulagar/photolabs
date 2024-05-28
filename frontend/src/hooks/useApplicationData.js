@@ -7,7 +7,8 @@ export const ACTIONS = {
     SET_PHOTO_DATA: 'SET_PHOTO_DATA',
     SET_TOPIC_DATA: 'SET_TOPIC_DATA',
     SELECT_PHOTO: 'SELECT_PHOTO',
-    DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS'
+    DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
+    GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
 }
 
 function reducer(state, action) {
@@ -44,6 +45,11 @@ function reducer(state, action) {
                 ...state,
                 displayModal: action.payload.photoDetails,
             };
+        case ACTIONS.GET_PHOTOS_BY_TOPICS:
+            return {
+                ...state,
+                photoData: action.payload.data,
+            };
         default:
             throw new Error(
                 `Tried to reduce with unsupported action type: ${action.type}`
@@ -60,17 +66,34 @@ const useApplicationData = () => {
     }
     const [state, dispatch] = useReducer(reducer, initialState);
 
+    const fetchPhotosByTopic = (id) => {
+        fetch(`/api/topics/photos/${id}`)
+            .then(res => res.json())
+            .then(data => {
+                dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, payload: { data } })
+            })
+            .catch(err => console.log('Error: ', err));
+    };
+
     useEffect(() => {
         fetch(`/api/photos`)
             .then(res => res.json())
             .then(data => {
                 dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: { data } })
-            });
+            })
+            .catch(err => console.log('Error: ', err));
+
         fetch(`/api/topics`)
             .then(res => res.json())
             .then(data => {
                 dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: { data } })
-            });
+            })
+            .catch(err => console.log('Error: ', err));
+
+        const initialTopicId = 1;
+        fetchPhotosByTopic(initialTopicId);
+
+
     }, []);
 
     const updateToFavPhotoIds = (id) => {
@@ -87,7 +110,11 @@ const useApplicationData = () => {
         dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: { photoDetails: null } });
     };
 
-    return { state, updateToFavPhotoIds, onPhotoSelect, onClosePhotoDetailsModal };
+    const openTopic = (id) => {
+        fetchPhotosByTopic(id);
+    };
+
+    return { state, updateToFavPhotoIds, onPhotoSelect, onClosePhotoDetailsModal, openTopic };
 }
 
 export default useApplicationData;
