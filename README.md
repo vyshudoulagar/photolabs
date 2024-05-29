@@ -9,8 +9,8 @@ The PhotoLabs project is a React Project and is a part of the Lighthouse Labs we
 5. Clicking on the Photolabs logo reloads the page.
 
 ## App Interface
-!["Screenshot of Homepage"]()
-!["Screenshot of Modal"]()
+!["Screenshot of Homepage"](https://github.com/vyshudoulagar/photolabs/blob/main/docs/photo-homepage.png)
+!["Screenshot of Modal"](https://github.com/vyshudoulagar/photolabs/blob/main/docs/photo-modal.png)
 
 ## Setup
 
