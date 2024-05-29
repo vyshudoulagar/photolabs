@@ -17,6 +17,9 @@ const App = () => {
         reLoad
     } = useApplicationData();
 
+    // returns boolean to determine if notification is displayed or not
+    const isFavPhotoExist = state.favPhoto.length > 0;
+
     return (
         <div className="App">
             <HomeRoute
@@ -27,8 +30,10 @@ const App = () => {
                 addFav={updateToFavPhotoIds}
                 onLoadTopic={onLoadTopic}
                 reLoad={reLoad}
+                isFavPhotoExist={isFavPhotoExist}
             />
             {state.displayModal && <PhotoDetailsModal
+                photos={state.photoData}
                 setDisplayModal={onPhotoSelect}
                 displayModal={state.displayModal}
                 closeDisplayModal={onClosePhotoDetailsModal}

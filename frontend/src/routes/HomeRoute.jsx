@@ -5,9 +5,7 @@ import TopNavigation from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
 
 const HomeRoute = (props) => {
-    const { photos, setDisplayModal, topics, favPhoto, addFav, onLoadTopic, reLoad } = props;
-
-    const isFavPhotoExist = favPhoto.length > 0;
+    const { photos, setDisplayModal, topics, favPhoto, addFav, onLoadTopic, reLoad, isFavPhotoExist } = props;
 
     return (
         <div className="home-route">
@@ -21,7 +19,8 @@ const HomeRoute = (props) => {
                 photos={photos}
                 addFav={addFav}
                 setDisplayModal={setDisplayModal}
-                favPhoto={favPhoto} />
+                favPhoto={favPhoto}
+            />
         </div>
     );
 };

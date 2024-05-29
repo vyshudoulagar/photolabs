@@ -27,27 +27,27 @@ const reducer = (state, action) => {
         case ACTIONS.SET_PHOTO_DATA:
             return {
                 ...state,
-                photoData: action.payload.data,
+                photoData: action.payload.data
             };
         case ACTIONS.SET_TOPIC_DATA:
             return {
                 ...state,
-                topicData: action.payload.data,
+                topicData: action.payload.data
             };
         case ACTIONS.SELECT_PHOTO:
             return {
                 ...state,
-                displayModal: action.payload.photo
+                displayModal: action.payload.photoDetails
             };
         case ACTIONS.DISPLAY_PHOTO_DETAILS:
             return {
                 ...state,
-                displayModal: action.payload.photoDetails,
+                displayModal: action.payload.photoDetails
             };
         case ACTIONS.GET_PHOTOS_BY_TOPICS:
             return {
                 ...state,
-                photoData: action.payload.data,
+                photoData: action.payload.data
             };
         case ACTIONS.SET_TOPIC_ID:
             return {
@@ -91,6 +91,7 @@ const useApplicationData = () => {
     }, []);
 
     useEffect(() => {
+        // get photos when a topic is clicked
         const fetchPhotosByTopic = (id) => {
             fetch(`/api/topics/photos/${id}`)
                 .then(res => res.json())
@@ -104,13 +105,15 @@ const useApplicationData = () => {
     }, [state.topicId]);
 
     const updateToFavPhotoIds = (id) => {
+        // add photo id to favPhoto array state
         state.favPhoto.includes(id)
             ? dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: { id } })
             : dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: { id } });
     };
 
-    const onPhotoSelect = (photo) => {
-        dispatch({ type: ACTIONS.SELECT_PHOTO, payload: { photo } });
+    const onPhotoSelect = (photoDetails) => {
+        // add the photo details to displayModal
+        dispatch({ type: ACTIONS.SELECT_PHOTO, payload: { photoDetails } });
     };
 
     const onClosePhotoDetailsModal = () => {
@@ -118,10 +121,12 @@ const useApplicationData = () => {
     };
 
     const onLoadTopic = (id) => {
+        // load photos of topic with id
         dispatch({ type: ACTIONS.SET_TOPIC_ID, payload: { id } });
     };
 
     const reLoad = () => {
+        // reload page when logo is clicked
         window.location.reload();
     };
 
