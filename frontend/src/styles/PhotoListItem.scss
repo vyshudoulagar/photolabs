@@ -1,6 +1,6 @@
 .photo-list__item {
   margin: 24px;
-  padding: 16px;
+  padding: 8px;
   border-width: 0.5px;
   border: 1px #e6e6e6;
   border-style: solid;
@@ -34,8 +34,8 @@
 
 .photo-list__user-details {
   display: flex;
-  align-items: center;
-  margin-top: 1em;
+//   align-items: center;
+//   margin-top: 1em;
 }
 
 .photo-list__user-info {
@@ -43,13 +43,13 @@
   font-weight: 700;
   font-size: 12px;
   margin-left: 8px;
-  p {
-    margin: 0em;
-  }
+//   p {
+//     margin: 0em;
+//   }
 }
 
 .photo-list__user-location {
-  margin-top: 0px;
-  margin-bottom: 0.5em;
+//   margin-top: 0px;
+//   margin-bottom: 0.5em;
   color: #838383;
 }

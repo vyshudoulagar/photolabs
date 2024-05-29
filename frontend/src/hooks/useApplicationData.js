@@ -8,17 +8,16 @@ export const ACTIONS = {
     SET_TOPIC_DATA: 'SET_TOPIC_DATA',
     SELECT_PHOTO: 'SELECT_PHOTO',
     DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
+    SET_TOPIC_ID: 'SET_TOPIC_ID',
     GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
 }
 
-function reducer(state, action) {
+const reducer = (state, action) => {
     switch (action.type) {
         case ACTIONS.FAV_PHOTO_ADDED:
             return {
                 ...state,
-                favPhoto: state.favPhoto.includes(action.payload.id)
-                    ? state.favPhoto
-                    : [...state.favPhoto, action.payload.id]
+                favPhoto: [...state.favPhoto, action.payload.id]
             };
         case ACTIONS.FAV_PHOTO_REMOVED:
             return {
@@ -50,6 +49,11 @@ function reducer(state, action) {
                 ...state,
                 photoData: action.payload.data,
             };
+        case ACTIONS.SET_TOPIC_ID:
+            return {
+                ...state,
+                topicId: action.payload.id
+            };
         default:
             throw new Error(
                 `Tried to reduce with unsupported action type: ${action.type}`
@@ -62,20 +66,14 @@ const useApplicationData = () => {
         favPhoto: [],
         displayModal: null,
         photoData: [],
-        topicData: []
-    }
-    const [state, dispatch] = useReducer(reducer, initialState);
-
-    const fetchPhotosByTopic = (id) => {
-        fetch(`/api/topics/photos/${id}`)
-            .then(res => res.json())
-            .then(data => {
-                dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, payload: { data } })
-            })
-            .catch(err => console.log('Error: ', err));
+        topicData: [],
+        topicId: null
     };
 
+    const [state, dispatch] = useReducer(reducer, initialState);
+
     useEffect(() => {
+
         fetch(`/api/photos`)
             .then(res => res.json())
             .then(data => {
@@ -90,11 +88,20 @@ const useApplicationData = () => {
             })
             .catch(err => console.log('Error: ', err));
 
-        const initialTopicId = 1;
-        fetchPhotosByTopic(initialTopicId);
-
-
     }, []);
+
+    useEffect(() => {
+        const fetchPhotosByTopic = (id) => {
+            fetch(`/api/topics/photos/${id}`)
+                .then(res => res.json())
+                .then(data => {
+                    dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, payload: { data } })
+                })
+                .catch(err => console.log('Error: ', err));
+        };
+
+        state.topicId && fetchPhotosByTopic(state.topicId);
+    }, [state.topicId]);
 
     const updateToFavPhotoIds = (id) => {
         state.favPhoto.includes(id)
@@ -110,11 +117,15 @@ const useApplicationData = () => {
         dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: { photoDetails: null } });
     };
 
-    const openTopic = (id) => {
-        fetchPhotosByTopic(id);
+    const onLoadTopic = (id) => {
+        dispatch({ type: ACTIONS.SET_TOPIC_ID, payload: { id } });
     };
 
-    return { state, updateToFavPhotoIds, onPhotoSelect, onClosePhotoDetailsModal, openTopic };
+    const reLoad = () => {
+        window.location.reload();
+    };
+
+    return { state, updateToFavPhotoIds, onPhotoSelect, onClosePhotoDetailsModal, onLoadTopic, reLoad };
 }
 
 export default useApplicationData;

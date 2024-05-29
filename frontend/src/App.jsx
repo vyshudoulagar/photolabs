@@ -14,7 +14,7 @@ const App = () => {
         updateToFavPhotoIds,
         onLoadTopic,
         onClosePhotoDetailsModal,
-        openTopic
+        reLoad
     } = useApplicationData();
 
     return (
@@ -25,9 +25,16 @@ const App = () => {
                 topics={state.topicData}
                 favPhoto={state.favPhoto}
                 addFav={updateToFavPhotoIds}
-                openTopic={openTopic}
+                onLoadTopic={onLoadTopic}
+                reLoad={reLoad}
             />
-            {state.displayModal && <PhotoDetailsModal setDisplayModal={onPhotoSelect} displayModal={state.displayModal} closeDisplayModal={onClosePhotoDetailsModal} addFav={updateToFavPhotoIds} favPhoto={state.favPhoto} />}
+            {state.displayModal && <PhotoDetailsModal
+                setDisplayModal={onPhotoSelect}
+                displayModal={state.displayModal}
+                closeDisplayModal={onClosePhotoDetailsModal}
+                addFav={updateToFavPhotoIds}
+                favPhoto={state.favPhoto}
+            />}
         </div>
     );
 };
