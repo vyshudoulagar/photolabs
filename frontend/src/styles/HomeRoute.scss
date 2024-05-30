@@ -2,3 +2,26 @@
   max-width: 1200px;
   margin: auto;
 }
+
+.home-route.dark {
+    background-color: #1e1e1e;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    height: 30px;
+    input {
+       width: 50%;
+       border-radius: 10px;
+       border-color: #1e1e1e;
+    }
+}
+
+.search-bar.dark {
+    input {
+        background-color: #1e1e1e;
+        border-color: darkgrey;
+    }
+}

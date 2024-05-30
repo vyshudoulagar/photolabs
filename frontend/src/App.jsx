@@ -14,7 +14,9 @@ const App = () => {
         updateToFavPhotoIds,
         onLoadTopic,
         onClosePhotoDetailsModal,
-        reLoad
+        reLoad,
+        setDarkMode,
+        setSearchText
     } = useApplicationData();
 
     // returns boolean to determine if notification is displayed or not
@@ -31,6 +33,9 @@ const App = () => {
                 onLoadTopic={onLoadTopic}
                 reLoad={reLoad}
                 isFavPhotoExist={isFavPhotoExist}
+                dark={state.dark}
+                setDarkMode={setDarkMode}
+                setSearchText={setSearchText}
             />
             {state.displayModal && <PhotoDetailsModal
                 photos={state.photoData}
@@ -39,6 +44,7 @@ const App = () => {
                 closeDisplayModal={onClosePhotoDetailsModal}
                 addFav={updateToFavPhotoIds}
                 favPhoto={state.favPhoto}
+                dark={state.dark}
             />}
         </div>
     );
