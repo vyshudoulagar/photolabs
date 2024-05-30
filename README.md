@@ -13,8 +13,8 @@ The PhotoLabs project is a React Project and is a part of the Lighthouse Labs we
 ## App Interface
 !["Screenshot of Homepage"](https://github.com/vyshudoulagar/photolabs/blob/main/docs/photo-homepage.png)
 !["Screenshot of Modal"](https://github.com/vyshudoulagar/photolabs/blob/main/docs/photo-modal.png)
-!["Screenshot of Darkmode"]()
-!["Screenshot of Search"]()
+!["Screenshot of Darkmode"](https://github.com/vyshudoulagar/photolabs/blob/main/docs/dark-mode.png)
+!["Screenshot of Search"](https://github.com/vyshudoulagar/photolabs/blob/main/docs/search-photo.png)
 
 ## Setup
 
