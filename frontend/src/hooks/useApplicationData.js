@@ -65,7 +65,7 @@ const reducer = (state, action) => {
         case ACTIONS.SET_SEARCH_TEXT:
             return {
                 ...state,
-                text: action.payload.text
+                searchText: action.payload.text
             };
         case ACTIONS.SEARCH_PHOTO_DATA:
             return {
