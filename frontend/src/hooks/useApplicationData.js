@@ -9,7 +9,10 @@ export const ACTIONS = {
     SELECT_PHOTO: 'SELECT_PHOTO',
     DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
     SET_TOPIC_ID: 'SET_TOPIC_ID',
-    GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
+    GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS',
+    SET_DARK_MODE: 'SET_DARK_MODE',
+    SET_SEARCH_TEXT: 'SET_SEARCH_TEXT',
+    SEARCH_PHOTO_DATA: 'SEARCH_PHOTO_DATA'
 }
 
 const reducer = (state, action) => {
@@ -54,6 +57,21 @@ const reducer = (state, action) => {
                 ...state,
                 topicId: action.payload.id
             };
+        case ACTIONS.SET_DARK_MODE:
+            return {
+                ...state,
+                dark: action.payload.data
+            };
+        case ACTIONS.SET_SEARCH_TEXT:
+            return {
+                ...state,
+                searchText: action.payload.text
+            };
+        case ACTIONS.SEARCH_PHOTO_DATA:
+            return {
+                ...state,
+                photoData: action.payload.data
+            };
         default:
             throw new Error(
                 `Tried to reduce with unsupported action type: ${action.type}`
@@ -67,7 +85,9 @@ const useApplicationData = () => {
         displayModal: null,
         photoData: [],
         topicData: [],
-        topicId: null
+        topicId: null,
+        dark: '',
+        searchText: ''
     };
 
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -104,6 +124,19 @@ const useApplicationData = () => {
         state.topicId && fetchPhotosByTopic(state.topicId);
     }, [state.topicId]);
 
+    useEffect(() => {
+        const fetchPhotosBySearch = (text) => {
+            fetch(`/api/search/${text}`)
+                .then(res => res.json())
+                .then(data => {
+                    dispatch({ type: ACTIONS.SEARCH_PHOTO_DATA, payload: { data } })
+                })
+                .catch(err => console.log('Error: ', err));
+        };
+
+        state.searchText && fetchPhotosBySearch(state.searchText);
+    }, [state.searchText]);
+
     const updateToFavPhotoIds = (id) => {
         // add photo id to favPhoto array state
         state.favPhoto.includes(id)
@@ -125,12 +158,20 @@ const useApplicationData = () => {
         dispatch({ type: ACTIONS.SET_TOPIC_ID, payload: { id } });
     };
 
+    const setSearchText = (text) => {
+        dispatch({ type: ACTIONS.SET_SEARCH_TEXT, payload: { text } });
+    };
+
     const reLoad = () => {
         // reload page when logo is clicked
         window.location.reload();
     };
 
-    return { state, updateToFavPhotoIds, onPhotoSelect, onClosePhotoDetailsModal, onLoadTopic, reLoad };
+    const setDarkMode = (data) => {
+        dispatch({ type: ACTIONS.SET_DARK_MODE, payload: { data } })
+    }
+
+    return { state, updateToFavPhotoIds, onPhotoSelect, onClosePhotoDetailsModal, onLoadTopic, reLoad, setDarkMode, setSearchText };
 }
 
 export default useApplicationData;

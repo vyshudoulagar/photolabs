@@ -7,10 +7,14 @@ The PhotoLabs project is a React Project and is a part of the Lighthouse Labs we
 3. Notification appears on the heart in the Navigation bar when a photo is liked.
 4. When a topic on the Naigation bar is clicked, photos of that category is displayed.
 5. Clicking on the Photolabs logo reloads the page.
+6. User can change the app to Darkmode or Lightmode by clicking moon icon or sun icon.
+7. User can search photos by username, topic, city or country.
 
 ## App Interface
 !["Screenshot of Homepage"](https://github.com/vyshudoulagar/photolabs/blob/main/docs/photo-homepage.png)
 !["Screenshot of Modal"](https://github.com/vyshudoulagar/photolabs/blob/main/docs/photo-modal.png)
+!["Screenshot of Darkmode"]()
+!["Screenshot of Search"]()
 
 ## Setup
 
